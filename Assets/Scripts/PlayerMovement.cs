@@ -31,9 +31,6 @@ public class PlayerMovement : MonoBehaviour
         {
             controller.Move(dir * speed * Time.deltaTime);
         }
-        Debug.Log(mainCamera.ScreenToWorldPoint(Input.mousePosition));
-        //transform.position = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5));
-        //transform.LookAt(dir);
         Aim();
     }
 
@@ -45,6 +42,5 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
-        Debug.DrawRay(transform.position, hit.point, Color.red);
     }
 }
