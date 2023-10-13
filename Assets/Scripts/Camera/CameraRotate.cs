@@ -8,7 +8,6 @@ public class CameraRotate : MonoBehaviour
     [SerializeField] float targetAngle;
     [SerializeField] float currentAngle;
     [SerializeField] float rotationSpeed;
-    [SerializeField] float targetAngle;
 
 
     void Start()

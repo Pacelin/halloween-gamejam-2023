@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(dir * speed * Time.deltaTime);
         }
         Aim();
+        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
     }
 
     private void Aim()
