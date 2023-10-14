@@ -1,30 +1,16 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 [CreateAssetMenu]
-public class EnemyDeathState : State<EnemyStateMachineData>
+public class EnemyDeathState : State<EnemyStateMachine>
 {
-	private int _currentPoint;
-	private NavMeshPath _path;
-	private void OnEnable()
+	public override void OnEnter(StateMachine machine)
 	{
-		_path = new NavMeshPath();
+		_context.EnemyMeshRenderer.enabled = false;
+		_context.DeathParticles.Play(true);
 	}
-	public override void OnEnter(StateMachine<EnemyStateMachineData> machine)
+	public override void OnUpdate(StateMachine machine)
 	{
-		_currentPoint = 0;
-		SetDestination(machine);
-	}
-	public override void OnUpdate(StateMachine<EnemyStateMachineData> machine)
-	{
-		if (!machine.Data.NavAgent.hasPath)
-			SetDestination(machine);
-	}
-
-	private void SetDestination(StateMachine<EnemyStateMachineData> machine)
-	{
-		NavMesh.CalculatePath(machine.transform.position, machine.Data.WalkTrajectory[_currentPoint].position, NavMesh.AllAreas, _path);
-		machine.Data.NavAgent.SetPath(_path);
-		_currentPoint = (_currentPoint + 1) % machine.Data.WalkTrajectory.Length;
+		if (_context.DeathParticles.isPlaying) return;
+		Destroy(_context.gameObject);
 	}
 }
