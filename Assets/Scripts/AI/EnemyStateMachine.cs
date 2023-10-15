@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class EnemyStateMachine : StateMachine
 {
 	public UnityEvent OnDead = new UnityEvent();
+	public UnityEvent OnPlayerFound = new UnityEvent();
 	
 	public bool IsAlive => _isAlive;
 	public EnemyWalkState WalkState { get; private set; }
@@ -21,7 +22,6 @@ public class EnemyStateMachine : StateMachine
 	public Transform[] WalkTrajectory;
 	[Header("Death Settings")]
 	public ParticleSystem DeathParticles;
-	//public MeshRenderer SelfMeshRenderer;
 	public MeshRenderer[] Meshes;
 	public Collider SelfCollider;
 	[Header("Follow Settings")]

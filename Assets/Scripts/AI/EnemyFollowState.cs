@@ -13,6 +13,7 @@ public class EnemyFollowState : EnemyAliveState
 	{
 		base.OnEnter();
 		_context.NavAgent.speed *= _context.SpeedUpMultiplier;
+		_context.OnPlayerFound.Invoke();
 	}
 
 	public override void OnExit()

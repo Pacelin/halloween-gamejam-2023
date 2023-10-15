@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Shooting : MonoBehaviour
 {
+	public UnityEvent OnShoot = new UnityEvent();
 	[SerializeField] private Transform _firePoint;
 	[SerializeField] private Projectile _projectilePrefab;
 	[SerializeField] private float _cooldown;
@@ -18,5 +20,6 @@ public class Shooting : MonoBehaviour
 
 		var projectile = Instantiate(_projectilePrefab);
 		projectile.Init(_firePoint.position, _firePoint.forward);
+		OnShoot.Invoke();
 	}
 }
