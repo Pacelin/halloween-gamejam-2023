@@ -43,6 +43,7 @@ public class EnemyStateMachine : StateMachine
 
 	public void KillSelf()
 	{
+		SelfCollider.enabled = false;
 		_isAlive = false;
 		OnDead?.Invoke();
 	}
