@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraRotate : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
-
-    [SerializeField] float targetAngle;
-    [SerializeField] float currentAngle;
-    [SerializeField] float rotationSpeed;
-
-
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -19,5 +14,10 @@ public class CameraRotate : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
