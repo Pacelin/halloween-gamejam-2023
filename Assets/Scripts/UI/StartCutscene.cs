@@ -7,6 +7,7 @@ public class StartCutscene : MonoBehaviour
 {
     public UnityEvent OnCutSceneEnded = new UnityEvent();
     [SerializeField] private VideoPlayer _video;
+	[SerializeField] private KeyCode _skipKey = KeyCode.Space;
 
 	public void Awake()
 	{
@@ -23,7 +24,12 @@ public class StartCutscene : MonoBehaviour
 	private IEnumerator Playing()
 	{
 		_video.Play();
-		yield return new WaitWhile(() => _video.isPlaying);
+		while (_video.isPlaying)
+		{
+			if (Input.GetKeyDown(_skipKey))
+				break;
+			yield return null;
+		}
 		OnCutSceneEnded.Invoke();
 	}
 }
