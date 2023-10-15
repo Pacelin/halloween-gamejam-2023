@@ -41,5 +41,6 @@ public class PlayerStateMachine : StateMachine
 	{
 		_isAlive = false;
 		OnDead?.Invoke();
+		Destroy(gameObject);
 	}
 }

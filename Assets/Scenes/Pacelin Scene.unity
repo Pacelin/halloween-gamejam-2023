@@ -168,8 +168,13 @@ MonoBehaviour:
   - {fileID: 891932984}
   - {fileID: 661861972}
   DeathParticles: {fileID: 421525996}
-  SelfMeshRenderer: {fileID: 49720689}
+  Meshes: []
   SelfCollider: {fileID: 49720688}
+  Target: {fileID: 0}
+  DistanceToFollow: 0
+  DistanceToReturn: 0
+  SpeedUpMultiplier: 0
+  AttackDistance: 0
 --- !u!195 &49720687
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1116,6 +1121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buildIndex: 3
+  _delay: 0
 --- !u!1 &1593623657
 GameObject:
   m_ObjectHideFlags: 0

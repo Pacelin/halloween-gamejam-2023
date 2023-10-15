@@ -21,8 +21,13 @@ public class ImageFading : MonoBehaviour
 
 	private void Awake()
 	{ 
-		if (_instance == null && _isGlobal)
-			_instance = this;
+		if (_isGlobal)
+		{
+			if (_instance == null)
+				_instance = this;
+			else
+				Destroy(gameObject);
+		}
 	}
 
 	public void FadeIn(Action inCallback = null, Action durationCallback = null) => StartCoroutine(FadingIn(inCallback, durationCallback));

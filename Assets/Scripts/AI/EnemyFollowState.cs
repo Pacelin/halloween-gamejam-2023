@@ -24,10 +24,14 @@ public class EnemyFollowState : EnemyAliveState
 	public override void OnUpdate()
 	{
 		base.OnUpdate();
-		NavMesh.CalculatePath(_machine.transform.position, _context.Target.position, NavMesh.AllAreas, _path);
+		NavMesh.CalculatePath(_machine.transform.position, _context.Target.transform.position, NavMesh.AllAreas, _path);
 		_context.NavAgent.SetPath(_path);
 
-		if (Vector3.Distance(_context.transform.position, _context.Target.position) >= _context.DistanceToReturn)
+		var distance = Vector3.Distance(_context.transform.position, _context.Target.transform.position) ;
+		if (distance >= _context.DistanceToReturn)
 			_machine.SwitchState(_context.WaitState);
+		else if (distance <= _context.AttackDistance)
+			_machine.SwitchState(_context.AttackState);
+
 	}
 }

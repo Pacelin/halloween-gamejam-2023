@@ -25,6 +25,7 @@ namespace Game
         
         private void LateUpdate()
         {
+            if (target == null) return;
             Vector3 targetPosition = target.position + cameraOffset;
             if (clamp)
                 targetPosition = ClampCameraPosition(targetPosition) + cameraOffset;

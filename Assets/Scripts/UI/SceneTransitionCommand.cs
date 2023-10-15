@@ -6,17 +6,24 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionCommand : MonoBehaviour
 {
     [SerializeField] [Scene] private int _buildIndex;
+    [SerializeField] private float _delay;
     private bool _loaded;
     private bool _faded;
     public void ApplyTransition()
     {
         _loaded = false;
         _faded = false;
-        ImageFading.Instance.FadeIn(
-            () => StartCoroutine(Load()), 
-            () => _faded = true);
-        ImageFading.Instance.FadeOut(() => _loaded && _faded);
+        StartCoroutine(Applying());
     }
+
+    private IEnumerator Applying()
+    {
+        yield return new WaitForSecondsRealtime(_delay);
+		ImageFading.Instance.FadeIn(
+			() => StartCoroutine(Load()),
+			() => _faded = true);
+		ImageFading.Instance.FadeOut(() => _loaded && _faded);
+	}
 
     private IEnumerator Load()
     {

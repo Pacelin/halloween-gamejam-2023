@@ -6,7 +6,8 @@ public class EnemyDeathState : State<EnemyStateMachine>
 
 	public override void OnEnter()
 	{
-		_context.SelfMeshRenderer.enabled = false;
+		foreach (var mesh in _context.Meshes)
+			mesh.enabled = false;
 		_context.SelfCollider.enabled = false;
 		_context.DeathParticles.Play(true);
 	}
