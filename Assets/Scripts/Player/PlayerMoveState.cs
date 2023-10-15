@@ -15,12 +15,12 @@ public class PlayerMoveState : PlayerAimState
 		base.OnUpdate();
 		float h = Input.GetAxisRaw("Horizontal");
 		float v = Input.GetAxisRaw("Vertical");
+		if (h == 0f && v == 0f)
+			_machine.SwitchState(_context.IdleState);
+
 		Vector3 dir = new Vector3(h, 0f, v).normalized;
 
-		if (dir.magnitude >= 0.1f)
-		{
-			NavMesh.CalculatePath(_context.transform.position, _context.transform.position + dir * 0.1f, NavMesh.AllAreas, _path);
-			_context.NavAgent.SetPath(_path);
-		}
+		NavMesh.CalculatePath(_context.transform.position, _context.transform.position + dir, NavMesh.AllAreas, _path);
+		_context.NavAgent.SetPath(_path);
 	}
 }

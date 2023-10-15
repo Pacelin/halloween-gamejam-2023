@@ -28,6 +28,9 @@ public class Arrow : Projectile
 
 	private IEnumerator OnCollisionEnter(Collision collision)
 	{
+		if (_friendly && collision.gameObject.TryGetComponent<PlayerStateMachine>(out _))
+			yield break;
+		
 		_targetAchieved = true;
 		_selfCollider.enabled = false;
 		_selfRigidbody.velocity = _direction * _speed;
