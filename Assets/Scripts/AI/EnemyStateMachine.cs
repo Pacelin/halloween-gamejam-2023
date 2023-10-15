@@ -9,6 +9,8 @@ public class EnemyStateMachine : StateMachine
 	public bool IsAlive => _isAlive;
 	public EnemyWalkState WalkState { get; private set; }
 	public EnemyDeathState DeathState { get; private set; }
+	public EnemyFollowState FollowState { get; private set; }
+	public EnemyWaitState WaitState { get; private set; }
 
 	[Header("State Controls")]
 	[SerializeField] private bool _isAlive;
@@ -20,11 +22,18 @@ public class EnemyStateMachine : StateMachine
 	public ParticleSystem DeathParticles;
 	public MeshRenderer SelfMeshRenderer;
 	public Collider SelfCollider;
+	[Header("Follow Settings")]
+	public Transform Target;
+	public float DistanceToFollow;
+	public float DistanceToReturn;
+	public float SpeedUpMultiplier;
 
 	private void Start()
 	{
 		WalkState = new EnemyWalkState(this, this);
 		DeathState = new EnemyDeathState(this, this);
+		FollowState = new EnemyFollowState(this, this);
+		WaitState = new EnemyWaitState(this, this);
 		SwitchState(WalkState);
 	}
 
