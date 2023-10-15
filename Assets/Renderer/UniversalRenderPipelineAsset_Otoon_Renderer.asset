@@ -155,4 +155,4 @@ MonoBehaviour:
   m_Active: 1
   settings:
     renderPassEvent: 1000
-    screenHeight: 660
+    screenHeight: 200
