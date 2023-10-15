@@ -22,7 +22,7 @@ public class SceneTransitionCommand : MonoBehaviour
 		ImageFading.Instance.FadeIn(
 			() => StartCoroutine(Load()),
 			() => _faded = true);
-		ImageFading.Instance.FadeOut(() => _loaded && _faded);
+		ImageFading.Instance.FadeOut(() => _loaded && _faded, () => Destroy(gameObject));
 	}
 
     private IEnumerator Load()
