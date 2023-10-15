@@ -8,7 +8,6 @@ public class EnemyDeathState : State<EnemyStateMachine>
 	{
 		foreach (var mesh in _context.Meshes)
 			mesh.enabled = false;
-		_context.SelfCollider.enabled = false;
 		_context.DeathParticles.Play(true);
 	}
 
