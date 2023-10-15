@@ -29,7 +29,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: RenderObjects
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
     passTag: RenderObjects
     Event: 600
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7afc38c2d1fc5794db8af8261ba5f3b1, type: 3}
   m_Name: Custom Pass
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   mask:
     serializedVersion: 2
     m_Bits: 1
@@ -96,7 +96,8 @@ MonoBehaviour:
   - {fileID: -1398300274641096028}
   - {fileID: 4077807534299589001}
   - {fileID: -1577521617693080988}
-  m_RendererFeatureMap: a4b2af084f3d98ec89a956e8584897386482e75f72841bea
+  - {fileID: 7348284315354325496}
+  m_RendererFeatureMap: a4b2af084f3d98ec89a956e8584897386482e75f72841beaf8e144e5a659fa65
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -152,7 +153,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd11e81f2ff2fb499916916cea37841, type: 3}
   m_Name: PixelizeFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 600
     screenHeight: 200
+--- !u!114 &7348284315354325496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FullScreenPassRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  passMaterial: {fileID: 2100000, guid: 56a0fd7bf1e068047911ffc226b01ae7, type: 2}
+  injectionPoint: 600
+  requirements: 4
+  passIndex: 0
