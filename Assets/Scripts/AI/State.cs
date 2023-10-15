@@ -1,16 +1,18 @@
-using UnityEngine;
-
-public abstract class State : ScriptableObject
+public abstract class State
 {
-	public virtual void OnEnter(StateMachine machine) { }
-    public virtual void OnUpdate(StateMachine machine) { }
-    public virtual void OnFixedUpdate(StateMachine machine) { }
-    public virtual void OnExit(StateMachine machine) { }
-    public virtual void OnTriggerEnterEvent(StateMachine machine) { }
+    protected StateMachine _machine;
+    public State(StateMachine machine) =>
+        _machine = machine;
+	public virtual void OnEnter() { }
+    public virtual void OnUpdate() { }
+    public virtual void OnFixedUpdate() { }
+    public virtual void OnExit() { }
+    public virtual void OnTriggerEnterEvent() { }
 }
 
 public abstract class State<T> : State
 {
     protected T _context;
-    public void Init(T context) => _context = context;
+	protected State(StateMachine machine, T context) : base(machine) =>
+        _context = context;
 }

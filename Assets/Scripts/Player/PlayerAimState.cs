@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 
-public abstract class PlayerAimState : State<PlayerStateMachine>
+public abstract class PlayerAimState : PlayerAliveState
 {
-	public override void OnUpdate(StateMachine machine)
+	protected PlayerAimState(StateMachine machine, PlayerStateMachine context) : base(machine, context) { }
+
+	public override void OnUpdate()
 	{
 		if (_context.AimEnabled)
 		{
-			_context.NavAgent.angularSpeed = 0; 
+			_context.NavAgent.angularSpeed = 0;
+			UpdateAim();
 		}
 		else
 		{
 			_context.NavAgent.angularSpeed = 360;
-			return;
 		}
 
+		HandleShooting();
+	}
+
+	private void UpdateAim()
+	{
 		var playerPos = _context.transform.position;
 		playerPos.y = 0;
 		var playerOnScreen = _context.MainCamera.WorldToScreenPoint(playerPos);
@@ -23,13 +30,11 @@ public abstract class PlayerAimState : State<PlayerStateMachine>
 		lookDirection.y = 0;
 
 		_context.transform.forward = lookDirection;
+	}
 
-		/*
-        Ray ray = _context.MainCamera.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-
-		if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-			_context.transform.LookAt(new Vector3(hit.point.x, _context.transform.position.y, hit.point.z));
-		*/
+	private void HandleShooting()
+	{
+		if (Input.GetKeyDown(_context.ShootKey))
+			_context.Shooting.Shoot();
 	}
 }

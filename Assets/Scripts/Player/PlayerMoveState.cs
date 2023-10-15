@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu]
-public class PlayerMoveState : PlayerAimState 
+public class PlayerMoveState : PlayerAimState
 {
 	private NavMeshPath _path;
-	public override void OnEnter(StateMachine machine) =>
-		_path = new NavMeshPath();
 
-	public override void OnUpdate(StateMachine machine)
+	public PlayerMoveState(StateMachine machine, PlayerStateMachine context) : base(machine, context)
 	{
-		base.OnUpdate(machine);
+		_path = new NavMeshPath();
+	}
+
+	public override void OnUpdate()
+	{
+		base.OnUpdate();
 		float h = Input.GetAxisRaw("Horizontal");
 		float v = Input.GetAxisRaw("Vertical");
 		Vector3 dir = new Vector3(h, 0f, v).normalized;

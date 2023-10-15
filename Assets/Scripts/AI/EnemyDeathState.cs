@@ -1,16 +1,19 @@
 using UnityEngine;
 
-[CreateAssetMenu]
 public class EnemyDeathState : State<EnemyStateMachine>
 {
-	public override void OnEnter(StateMachine machine)
+	public EnemyDeathState(StateMachine machine, EnemyStateMachine context) : base(machine, context) { }
+
+	public override void OnEnter()
 	{
-		_context.EnemyMeshRenderer.enabled = false;
+		_context.SelfMeshRenderer.enabled = false;
+		_context.SelfCollider.enabled = false;
 		_context.DeathParticles.Play(true);
 	}
-	public override void OnUpdate(StateMachine machine)
+
+	public override void OnUpdate()
 	{
 		if (_context.DeathParticles.isPlaying) return;
-		Destroy(_context.gameObject);
+		Object.Destroy(_context.gameObject);
 	}
 }

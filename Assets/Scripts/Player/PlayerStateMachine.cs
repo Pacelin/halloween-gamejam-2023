@@ -4,6 +4,9 @@ using UnityEngine.Events;
 
 public class PlayerStateMachine : StateMachine
 {
+	public PlayerIdleState IdleState { get; private set; }
+	public PlayerMoveState MoveState { get; private set; }
+
 	public UnityEvent OnDead = new UnityEvent();
 	
 	public bool IsAlive => _isAlive;
@@ -15,11 +18,11 @@ public class PlayerStateMachine : StateMachine
 	[SerializeField] private bool _aimEnabled = true;
 	[SerializeField] private bool _movementEnabled = true;
 	[Space]
-	[Header("Idle Settings")]
-	public PlayerIdleState IdleState;
 	[Header("Movement Settings")]
-	public PlayerMoveState MoveState;
 	public NavMeshAgent NavAgent;
+	[Header("Shooting Settings")]
+	public Shooting Shooting;
+	public KeyCode ShootKey = KeyCode.Mouse0;
 
 	public Camera MainCamera => _mainCamera;
 	private Camera _mainCamera;
@@ -27,10 +30,8 @@ public class PlayerStateMachine : StateMachine
 	private void Awake()
 	{
 		_mainCamera = Camera.main;
-		IdleState = Instantiate(IdleState);
-		MoveState = Instantiate(MoveState);
-		IdleState.Init(this);
-		MoveState.Init(this);
+		IdleState = new PlayerIdleState(this, this);
+		MoveState = new PlayerMoveState(this, this);
 	}
 
 	private void Start() =>
@@ -39,6 +40,6 @@ public class PlayerStateMachine : StateMachine
 	public void KillSelf()
 	{
 		_isAlive = false;
-		OnDead.Invoke();
+		OnDead?.Invoke();
 	}
 }

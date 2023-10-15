@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 
-public class PlayerIdleState : PlayerAimState
+public class PlayerAliveState : State<PlayerStateMachine>
 {
-	public PlayerIdleState(StateMachine machine, PlayerStateMachine context) : base(machine, context) { }
-
-	public override void OnEnter() =>
-		_context.NavAgent.ResetPath();
+	public PlayerAliveState(StateMachine machine, PlayerStateMachine context) : base(machine, context) { }
 
 	public override void OnUpdate()
 	{

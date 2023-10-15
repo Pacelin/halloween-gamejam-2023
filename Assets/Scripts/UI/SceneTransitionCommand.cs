@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(DontDestroyOnLoadComponent))]
 public class SceneTransitionCommand : MonoBehaviour
 {
     [SerializeField] [Scene] private int _buildIndex;

@@ -7,11 +7,11 @@ public class StateMachine : MonoBehaviour
 
 	public void SwitchState(State state)
     {
-        _currentState?.OnExit(this);
+        _currentState?.OnExit();
         _currentState = state;
-        _currentState?.OnEnter(this);
+        _currentState?.OnEnter();
     }
 
-    private void Update() => _currentState?.OnUpdate(this);
-	private void FixedUpdate() => _currentState?.OnFixedUpdate(this);
+    private void Update() => _currentState?.OnUpdate();
+	private void FixedUpdate() => _currentState?.OnFixedUpdate();
 }

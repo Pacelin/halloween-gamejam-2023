@@ -1,35 +1,35 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu]
-public class EnemyWalkState : State<EnemyStateMachine>
+public class EnemyWalkState : EnemyAliveState
 {
 	private int _currentPoint;
 	private NavMeshPath _path;
 
-	public override void OnEnter(StateMachine machine)
+	public EnemyWalkState(StateMachine machine, EnemyStateMachine context) : base(machine, context) { }
+
+	public override void OnEnter()
 	{
 		_path = new NavMeshPath();
 		_currentPoint = 0;
-		SetDestination(machine);
+		SetDestination();
 	}
 
-	public override void OnExit(StateMachine machine)
+	public override void OnExit()
 	{
 		_context.NavAgent.ResetPath();
 	}
 
-	public override void OnUpdate(StateMachine machine)
+	public override void OnUpdate()
 	{
+		base.OnUpdate();
 		if (!_context.NavAgent.hasPath)
-			SetDestination(machine);
-
-		if (!_context.IsAlive) machine.SwitchState(_context.DeathState);
+			SetDestination();
 	}
 
-	private void SetDestination(StateMachine machine)
+	private void SetDestination()
 	{
-		NavMesh.CalculatePath(machine.transform.position, _context.WalkTrajectory[_currentPoint].position, NavMesh.AllAreas, _path);
+		NavMesh.CalculatePath(_machine.transform.position, _context.WalkTrajectory[_currentPoint].position, NavMesh.AllAreas, _path);
 		_context.NavAgent.SetPath(_path);
 		_currentPoint = (_currentPoint + 1) % _context.WalkTrajectory.Length;
 	}
