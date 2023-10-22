@@ -19,10 +19,10 @@ public class SceneTransitionCommand : MonoBehaviour
     private IEnumerator Applying()
     {
         yield return new WaitForSecondsRealtime(_delay);
-		ImageFading.Instance.FadeIn(
+		CanvasGroupFading.Instance.FadeIn(
 			() => StartCoroutine(Load()),
 			() => _faded = true);
-		ImageFading.Instance.FadeOut(() => _loaded && _faded, () => Destroy(gameObject));
+		CanvasGroupFading.Instance.FadeOut(() => _loaded && _faded, () => Destroy(gameObject));
 	}
 
     private IEnumerator Load()

@@ -13,13 +13,13 @@ namespace Game
 
         [SerializeField] private float smoothSpeed;
         
-        private Camera camera;
+        private Camera _camera;
         private Vector2 size;
 
         private void Awake()
         {
-            camera = GetComponent<Camera>();
-            size.y = camera.orthographicSize * 2f;
+            _camera = GetComponent<Camera>();
+            size.y = _camera.orthographicSize * 2f;
             size.x = size.y * Screen.width / Screen.height;
         }
         

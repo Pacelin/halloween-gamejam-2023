@@ -12,7 +12,6 @@ public class Arrow : Projectile
 	protected override void Fire()
 	{
 		transform.position = _firePoint;
-		_direction.y += 0.1f;
 		_direction = _direction.normalized;
 
 		transform.up = _direction;

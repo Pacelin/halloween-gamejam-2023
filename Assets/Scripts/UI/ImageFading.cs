@@ -3,10 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageFading : MonoBehaviour
+public class CanvasGroupFading : MonoBehaviour
 {
-	public static ImageFading Instance => _instance;
-	private static ImageFading _instance;
+	public static CanvasGroupFading Instance => _instance;
+	private static CanvasGroupFading _instance;
 
 	[SerializeField] private Image _image;
 	[Space]
