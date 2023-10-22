@@ -6,7 +6,8 @@ public class EnemyAliveState : State<EnemyStateMachine>
 
 	public override void OnUpdate()
 	{
-		if (_machine.CurrentState != _context.FollowState)
+		if (_machine.CurrentState != _context.FollowState &&
+			_machine.CurrentState != _context.WaitState)
 			if (Vector3.Distance(_context.transform.position, _context.Target.transform.position) <= _context.DistanceToFollow)
 				_machine.SwitchState(_context.FollowState);
 		if (_context.IsAlive) return;

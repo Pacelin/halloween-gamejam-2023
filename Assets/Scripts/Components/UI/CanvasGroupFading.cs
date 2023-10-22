@@ -21,6 +21,7 @@ namespace Pacelin
 
 		private IEnumerator FadingIn(Action callback)
 		{
+			gameObject.SetActive(true);
 			for (float t = 0; t < _fadeInTime; t += Time.deltaTime)
 			{
 				_canvasGroup.alpha = t / _fadeInTime;
@@ -39,6 +40,7 @@ namespace Pacelin
 			}
 			_canvasGroup.alpha = 0;
 			callback();
+			gameObject.SetActive(false);
 		}
 	}
 }

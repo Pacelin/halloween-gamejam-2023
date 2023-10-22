@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public class EnemyCounter : MonoBehaviour
 {
+	public EnemyStateMachine[] Enemies => _enemies;
+
 	public event Action<int> OnEnemyCountChanged;
 	public UnityEvent OnAllEnemiesKilled = new UnityEvent();
 	[SerializeField] private EnemyStateMachine[] _enemies;

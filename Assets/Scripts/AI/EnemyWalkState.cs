@@ -5,7 +5,8 @@ public class EnemyWalkState : EnemyAliveState
 {
 	private int _currentPoint;
 	private NavMeshPath _path;
-
+	private float _timer;
+	private float _stopTime;
 	public EnemyWalkState(StateMachine machine, EnemyStateMachine context) : base(machine, context) { }
 
 	public override void OnEnter()
@@ -24,7 +25,17 @@ public class EnemyWalkState : EnemyAliveState
 	{
 		base.OnUpdate();
 		if (!_context.NavAgent.hasPath)
-			SetDestination();
+		{
+			if (_timer == 0)
+				_context.DistanceToFollow *= _context.DistanceToFollowWhenStoppedMultiplier;
+
+			_timer += Time.deltaTime;
+			if (_timer > _stopTime)
+			{
+				_context.DistanceToFollow /= _context.DistanceToFollowWhenStoppedMultiplier;
+				SetDestination();
+			}
+		}
 	}
 
 	private void SetDestination()
@@ -32,5 +43,7 @@ public class EnemyWalkState : EnemyAliveState
 		NavMesh.CalculatePath(_machine.transform.position, _context.WalkTrajectory[_currentPoint].position, NavMesh.AllAreas, _path);
 		_context.NavAgent.SetPath(_path);
 		_currentPoint = (_currentPoint + 1) % _context.WalkTrajectory.Length;
+		_stopTime = Random.Range(_context.StopTimeRange.x, _context.StopTimeRange.y);
+		_timer = 0;
 	}
 }

@@ -16,6 +16,6 @@ public class EnemyWaitState : EnemyAliveState
 		base.OnUpdate();
 		_timer += Time.deltaTime;
 		if (_timer >= 1)
-			_machine.SwitchState(_context.FollowState);
+			_machine.SwitchState(_context.WalkState);
 	}
 }

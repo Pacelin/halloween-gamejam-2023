@@ -1,8 +1,11 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShootingComponent : MonoBehaviour
 {
+	public UnityEvent OnShootEvent;
 	public event Action OnShoot;
 	public event Action OnReloaded;
 
@@ -10,6 +13,9 @@ public class ShootingComponent : MonoBehaviour
     [SerializeField] private Arrow _arrowPrefab;
 	[SerializeField] private Transform _firePoint;
 	[SerializeField] private float _cooldown;
+	[Space]	
+	[SerializeField] private EnemyCounter _enemies;
+	[SerializeField] private float _distanceToEnemiesWhoHearShoot;
 
 	private float _timer = 0;
 
@@ -34,5 +40,11 @@ public class ShootingComponent : MonoBehaviour
 
 		arrow.Init(_firePoint.position, direction);
 		OnShoot?.Invoke();
+		OnShootEvent.Invoke();
+
+		var enemies =
+			_enemies.Enemies.Where(e => Vector3.Distance(e.transform.position, transform.position) <= _distanceToEnemiesWhoHearShoot);
+		foreach (var enemy in enemies)
+			enemy.SwitchState(enemy.FollowState);
 	}
 }

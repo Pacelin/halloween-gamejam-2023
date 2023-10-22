@@ -6,7 +6,8 @@ public class EnemyStateMachine : StateMachine
 {
 	public UnityEvent OnDead = new UnityEvent();
 	public UnityEvent OnPlayerFound = new UnityEvent();
-	
+	public UnityEvent OnRage = new UnityEvent();
+
 	public bool IsAlive => _isAlive;
 	public EnemyWalkState WalkState { get; private set; }
 	public EnemyDeathState DeathState { get; private set; }
@@ -20,16 +21,24 @@ public class EnemyStateMachine : StateMachine
 	[Header("Walk Settings")]
 	public NavMeshAgent NavAgent;
 	public Transform[] WalkTrajectory;
+	public Vector2 StopTimeRange;
 	[Header("Death Settings")]
 	public ParticleSystem DeathParticles;
 	public MeshRenderer[] Meshes;
 	public Collider SelfCollider;
 	[Header("Follow Settings")]
-	public PlayerStateMachine Target;
+	public Player Target;
 	public float DistanceToFollow;
 	public float DistanceToReturn;
+	public float DistanceToFollowWhenStoppedMultiplier;
+	public float MinFollowTime;
+	[Space]
 	public float SpeedUpMultiplier;
+	public float RageSpeedUpMultiplier;
+	public float RageTime;
+	[Space]
 	public float AttackDistance;
+	
 
 	private void Start()
 	{
